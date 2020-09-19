@@ -7,11 +7,13 @@ import {AppRoutingModule} from './app-routing.module';
 import { CreateCidadeComponent } from './create-cidade/create-cidade.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { ListCidadesComponent } from './list-cidades/list-cidades.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateCidadeComponent
+    CreateCidadeComponent,
+    ListCidadesComponent
   ],
   imports: [
     BrowserModule,
