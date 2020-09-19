@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {CidadeService} from '../service/cidade.service';
 import {Cidade} from '../model/cidade.model';
+import {WeatherForecastService} from '../service/weather-forecast.service';
 
 @Component({
   selector: 'app-create-cidade',
@@ -12,14 +13,15 @@ export class CreateCidadeComponent implements OnInit {
 
   cidadeForm = this.fb.group({
     id: [],
-    nome: ["",Validators.required],
+    nome: ['', Validators.required],
     estado: [],
     pais: [],
   });
   alert: boolean;
   msgAlert: string;
+  isCidadeOk: boolean;
 
-  constructor(private fb: FormBuilder, private cidadeService: CidadeService) {
+  constructor(private fb: FormBuilder, private cidadeService: CidadeService, private weatherForecastService: WeatherForecastService) {
   }
 
   ngOnInit(): void {
@@ -37,9 +39,9 @@ export class CreateCidadeComponent implements OnInit {
 
   save(): any {
     const cidade = this.createCidadeFromForm();
-      this.cidadeService.create(cidade).subscribe(res => {
-        this.showAlert('Cidade cadastrada com sucesso!');
-      });
+    this.cidadeService.create(cidade).subscribe(res => {
+      this.showAlert('Cidade cadastrada com sucesso!');
+    });
   }
 
   showAlert(message: string) {
@@ -48,6 +50,17 @@ export class CreateCidadeComponent implements OnInit {
     setTimeout(() => {
       this.alert = false;
     }, 3000);
+  }
+
+  checkCidadeIsValid(){
+    let cidade = this.cidadeForm.get(['nome']).value;
+    this.weatherForecastService.checkCidadeIsValid(cidade).subscribe((res) => {
+      this.isCidadeOk = true;
+    }, err => {
+      if(err.status == 404){
+        this.isCidadeOk = false;
+      }
+    });
   }
 
 

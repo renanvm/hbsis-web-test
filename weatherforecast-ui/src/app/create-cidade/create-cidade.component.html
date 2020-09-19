@@ -12,12 +12,17 @@
     <div class="form-group row">
       <label class="col-sm-1 col-form-label" for="nome">Nome</label>
       <div class="col-sm-4">
-        <input class="form-control" type="text" id="nome" name="nome" formControlName="nome">
+        <input class="form-control" type="text" id="nome" name="nome" formControlName="nome"
+               (focusout)="checkCidadeIsValid()">
       </div>
-      <div class="col-2" [hidden]="!(cidadeForm.controls.nome?.invalid)">
+      <div class="col-2" [hidden]="!cidadeForm.controls.nome?.touched">
         <small class="form-text text-danger"
                [hidden]="!cidadeForm.controls.nome?.errors?.required">
           Este campo é obrigatório
+        </small>
+        <small class="form-text text-danger"
+               [hidden]="isCidadeOk">
+          Nome de cidade inválido!
         </small>
       </div>
     </div>
@@ -35,7 +40,7 @@
     </div>
     <hr>
     <div class="row">
-      <button class="btn btn-success" type="submit" [disabled]="cidadeForm.invalid">Salvar</button>
+      <button class="btn btn-success" type="submit" [disabled]="cidadeForm.invalid || !isCidadeOk">Salvar</button>
     </div>
   </form>
 </div>
