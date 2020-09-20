@@ -8,12 +8,14 @@ import { CreateCidadeComponent } from './create-cidade/create-cidade.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { ListCidadesComponent } from './list-cidades/list-cidades.component';
+import { ForecastCidadeComponent } from './forecast-cidade/forecast-cidade.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateCidadeComponent,
-    ListCidadesComponent
+    ListCidadesComponent,
+    ForecastCidadeComponent
   ],
   imports: [
     BrowserModule,
