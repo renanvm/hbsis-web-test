@@ -9,8 +9,8 @@
       <th scope="col">Nome</th>
       <th scope="col">Estado</th>
       <th scope="col">País</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col" [ngStyle]="{'width.%':'8.33'}"></th>
+      <th scope="col" [ngStyle]="{'width.%':'8.33'}"></th>
     </tr>
     </thead>
     <tbody>
@@ -20,9 +20,11 @@
       <td>{{ cidade.estado }}</td>
       <td>{{ cidade.pais }}</td>
       <td>
-        <button class="btn btn-danger" (click)="removeCidade(cidade.id)">Excluir</button>
+        <button class="btn-sm btn-danger" (click)="removeCidade(cidade.id)">Excluir</button>
       </td>
-      <td></td>
+      <td>
+        <button class="btn-sm btn-primary" [routerLink]="['/forecast-cidade', cidade.nome]">Previsão</button>
+      </td>
     </tr>
     </tbody>
   </table>
