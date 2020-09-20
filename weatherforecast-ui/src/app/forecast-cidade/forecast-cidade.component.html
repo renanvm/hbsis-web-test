@@ -1,0 +1,24 @@
+<div class="mt-3 ml-3">
+  <table class="table table-striped" *ngIf="previsoes">
+    <thead>
+    <tr>
+      <th scope="col">Data</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Temperatura Mínima</th>
+      <th scope="col">Temperatura Máxima</th>
+      <th scope="col">Umidade</th>
+      <th scope="col">Velocidade Vento</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let previsao of previsoes">
+      <td>{{ previsao.data | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ previsao.descricao }}</td>
+      <td>{{ previsao.tempMinima }} °</td>
+      <td>{{ previsao.tempMaxima }} °</td>
+      <td>{{ previsao.umidade }} %</td>
+      <td>{{ previsao.velocidadeVento }} m/s</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
