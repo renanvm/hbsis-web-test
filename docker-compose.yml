@@ -1,0 +1,16 @@
+version: '3'
+services:
+
+  weatherforecast-app:
+    build: ./weatherforecast-app
+    container_name: weatherforecast-app
+    ports:
+      - 8080:8080
+
+  weatherforecast-ui:
+    build: ./weatherforecast-ui
+    container_name: weatherforecast-ui
+    ports:
+      - 4200:80
+    links:
+      - weatherforecast-app
