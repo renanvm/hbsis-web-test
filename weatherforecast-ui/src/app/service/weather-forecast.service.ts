@@ -8,11 +8,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class WeatherForecastService {
 
-  apiUrl = 'http://localhost:8080/api/weather';
+  apiUrl = 'http://localhost:8080/api/forecast';
 
   constructor(protected http: HttpClient) { }
 
   checkCidadeIsValid(cidade: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/check/${cidade}`);
+  }
+
+  getPrevisoes(cidade: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${cidade}`);
   }
 
