@@ -20,6 +20,7 @@ export class CreateCidadeComponent implements OnInit {
   alert: boolean;
   msgAlert: string;
   isCidadeOk: boolean;
+  isCidadeSaved: boolean;
 
   constructor(private fb: FormBuilder, private cidadeService: CidadeService, private weatherForecastService: WeatherForecastService) {
   }
@@ -39,8 +40,17 @@ export class CreateCidadeComponent implements OnInit {
 
   save(): any {
     const cidade = this.createCidadeFromForm();
-    this.cidadeService.create(cidade).subscribe(res => {
-      this.showAlert('Cidade cadastrada com sucesso!');
+
+    this.cidadeService.findByNome(cidade.nome).subscribe(res => {
+      this.isCidadeSaved = true;
+      this.showAlert('Cidade já cadastrada!');
+    }, err => {
+      if (err.status == 404) {
+        this.isCidadeSaved = false;
+        this.cidadeService.create(cidade).subscribe(res => {
+          this.showAlert('Cidade cadastrada com sucesso!');
+        });
+      }
     });
   }
 
@@ -52,15 +62,16 @@ export class CreateCidadeComponent implements OnInit {
     }, 3000);
   }
 
-  checkCidadeIsValid(){
+  checkCidadeIsValid() {
     let cidade = this.cidadeForm.get(['nome']).value;
     this.weatherForecastService.checkCidadeIsValid(cidade).subscribe((res) => {
       this.isCidadeOk = true;
     }, err => {
-      if(err.status == 404){
+      if (err.status == 404) {
         this.isCidadeOk = false;
       }
     });
+
   }
 
 

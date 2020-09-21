@@ -29,6 +29,10 @@ export class CidadeService {
     return this.http.get<Cidade>(`${this.apiUrl}/${id}`);
   }
 
+  findByNome(nome: string): Observable<any> {
+    return this.http.get<Cidade>(`${this.apiUrl}/nome/${nome}`);
+  }
+
   remove(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
