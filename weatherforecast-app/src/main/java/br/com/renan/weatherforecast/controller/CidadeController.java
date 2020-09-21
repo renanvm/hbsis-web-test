@@ -52,6 +52,15 @@ public class CidadeController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<?> getCidadeByNome(@PathVariable String nome) {
+        if (cidadeRepository.findByNome(nome).isPresent()) {
+            Cidade cidade = cidadeRepository.findByNome(nome).get();
+            return ResponseEntity.ok().body(cidade);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCidade(@PathVariable Long id) {
         if (cidadeRepository.findById(id).isPresent()) {
