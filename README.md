@@ -1,11 +1,11 @@
 # Weather Forecast App
 
-Está aplicação permite cadastrar cidades e exibir previsões do tempo.
+Aplicação monolítica que permite cadastrar cidades e exibir previsões do tempo das mesmas.
 
   - Backend construído em Java (Spring Boot)
-  - Frontend construído em Angular
+  - Frontend construído com Angular e Bootstrap
   - Banco de dados H2
-  - Docker
+  - Deploy com Docker
   - Integração com OpenWeatherMap API
  
 #### Como rodar a aplicação?
